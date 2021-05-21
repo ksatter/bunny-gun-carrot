@@ -29,45 +29,86 @@ $(document).ready(function () {
     $("#pick").hide()
     $("#game").hide()
 
-    $("#player-name").keyup(function (event) {
-        if (event.which !== 13) return false;
-
-        playerName = $(this).val().trim();
-        gameSetup()
+    $('#solo').click(function () {
+        playerName = $('#player-name').val().trim();
+        if (!playerName) return false
+        soloGameSetup()
     })
 
+    $('#computer').click(function () {
+        playerName = $('#player-name').val().trim();
+        if(!playerName) return false
+        twoPlayerGameSetup()
+    })
+    $('#monkey-butt').click(function () {
+        playerName = $('#player-name').val().trim();
+        if (!playerName) return false
+        if (Math.round(Math.random()) === 0) {
+            twoPlayerGameSetup()
+        } else {
+            soloGameSetup()
+        }
+
+    })
     $('.choice').click(function () {
         $('#picked').empty().append($(this).clone())
         picked = $(this).attr('id')
         $('#modal1').modal('open')
     })
 
+    $('#random').click(function() {
+        var options = ["Bunny", "Gun", "Carrot"]
+
+        var choice = options[Math.floor(Math.random() * options.length)]
+
+        $(`#${choice}`).click()
+    })
+
     $('#confirm').click(function () {
         $('#modal1').modal('close')
         const playerPicked = $(`#${picked}`).closest('.card').clone();
         $('#player-card').children().replaceWith(playerPicked)
-        playerRef.set({
+
+        if(playerRef) playerRef.set({
             name: playerName,
             choice: picked
         })
+
+        else action();
+
         $("#pick").hide()
         $("#game").show()
     })
-    $("#stay").click(function () {
+    $("#same").click(function () {
         picked = "";
         opponentPick = "";
-        playerRef.set({
+        if (playerRef) playerRef.set({
             name: playerName,
             choice: picked
         })
+        else soloGameSetup()
+
         $("#modal2").modal("close");
         $("#game").hide();
         $("#pick").show();
     })
+
+    $('#different').click(function() {
+        picked = "";
+        opponentPick = "";
+        if (playerRef) playerRef.set({
+            name: playerName,
+            choice: picked
+        })
+        
+        $("#modal2").modal("close");
+        $("#game").hide();
+        $('#welcome').show();
+    })
 });
 
 
-const gameSetup = async () => {
+const twoPlayerGameSetup = async () => {
     const waitingGame = await db.ref("waiting").get()
     const validateWaitingGame = await db.ref(`games/${waitingGame.val()}`).get()
 
@@ -93,6 +134,14 @@ const gameSetup = async () => {
 
 }
 
+const soloGameSetup = () => {
+    startGame();
+
+    var options = ["Bunny", "Gun", "Carrot"];
+    opponentChoice = options[Math.floor(Math.random() * options.length)];
+    opponentName = "Monkey Butt";
+}
+
 const startGame = () => {
     $('#welcome').hide();
     $('#pick').show();
@@ -111,7 +160,7 @@ const startWatching = () => {
         if (!opponent && opponentName) {
             gameRef.off('value');
             opponentFound = false
-            gameSetup()
+            twoPlayerGameSetup()
         } else if (!opponent) {
             waiting()
         }  else if (opponent) {
@@ -133,6 +182,10 @@ function waiting() {
 }
 
 const action = () => {
+    console.log(picked)
+    const playerPicked = $(`#${opponentChoice}`).closest('.card').clone();
+    $('#opponent-card').children().replaceWith(playerPicked)
+    $(`#opponent-name`).text(opponentName)
     console.log(opponentChoice, pick)
     if (opponentChoice === picked) {
         end("Tie")

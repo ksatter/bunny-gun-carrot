@@ -9,17 +9,17 @@
 
     <!-- Materialize Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-   <!-- Material Icons-->
+    <!-- Material Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Custom Styling-->
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" 
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous"></script>
-         <!-- Materialize Compiled and minified JavaScript -->
+    <!-- Materialize Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
     <!-- Firebase Database -->
@@ -44,6 +44,11 @@
                 <input id="player-name" type="text" class="validate">
             </div>
 
+            <div class="col s12" >
+                <a class="waves-effect waves-teal btn-flat" id="solo">Single player</a>
+                <a class="waves-effect waves-teal btn-flat" id="computer">Two Player</a>
+                <a class="waves-effect waves-teal btn-flat" id="monkey-butt">I Can't Choose!</a>
+            </div>
         </div>
         <!-- /WELCOME-->
         <!-- PICK -->
@@ -54,8 +59,7 @@
                 <div class="col s4">
                     <div class="card">
                         <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator choice responsive-img" id="Bunny"
-                                src="assets/images/Bunny.png">
+                            <img class="activator choice responsive-img" id="Bunny" src="assets/images/Bunny.png">
                         </div>
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4">Bunny</span>
@@ -83,16 +87,18 @@
                     </div>
                 </div>
             </div>
+            <a class="waves-effect waves-teal btn-flat" id="random">I Can't Choose!</a>
             <div id="modal1" class="modal">
                 <div class="modal-content">
-                  <h4>Your Pick:</h4>
-                  <div id="picked"></div>
+                    <h4>Your Pick:</h4>
+                    <div id="picked"></div>
                 </div>
                 <div class="modal-footer">
-                  <a href="#!" class="waves-effect waves-green btn-flat" id="confirm">Okay</a>
-                  <a href="#!" class="modal-close waves-effect waves-green btn-flat">Pick Again</a>
+                    <a href="#!" class="waves-effect waves-green btn-flat" id="confirm">Okay</a>
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Pick Again</a>
                 </div>
-              </div>
+            </div>
+
         </div>
         <!-- /PICK -->
         <!-- GAME -->
@@ -103,8 +109,7 @@
                 <div class="col s6" id="player-card">
                     <div class="card">
                         <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" 
-                                src="https://via.placeholder.com/150?text=this+will+be+a+bunny">
+                            <img class="activator" src="https://via.placeholder.com/150?text=this+will+be+a+bunny">
                         </div>
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4">Bunny</span>
@@ -125,21 +130,24 @@
             <div id="modal2" class="modal">
                 <div class="modal-content">
                     <h4 id="results-text"></h4>
-                        <div  >
-                            <img class="activator responsive-img" id="state-img" src="assets/images/Carrot.png">
-                        </div>
+                    <div>
+                        <img class="activator responsive-img" id="state-img" src="assets/images/Carrot.png">
                     </div>
-                    <h4 id="pick-text"></h4>
+                </div>
+                <h4 id="pick-text"></h4>
                 <div class="modal-footer">
+
+
+                    <a href="#!" class="waves-effect waves-green btn-flat" id="same">Play <span id="opponent-name"></span> Again</a>
+                    <a href="#!" class="waves-effect waves-green btn-flat" id="different">Choose Another Opponent</a>
+
                     
 
-                  <a href="#!" class="waves-effect waves-green btn-flat" id="stay">Play Again</a>
-                 
                 </div>
-              </div>
+            </div>
         </div>
         <!-- /GAME-->
-    <script src="assets/js/script.js"></script>
+        <script src="assets/js/script.js"></script>
 </body>
 
 </html>
